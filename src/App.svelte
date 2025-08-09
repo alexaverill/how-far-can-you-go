@@ -1,14 +1,17 @@
 <script lang="ts">
-	import { Map, TileLayer, Marker, Popup, Polyline,GeoJSON } from 'sveaflet';
+	import { Map, TileLayer, Marker, Popup, Polyline,GeoJSON,Icon } from 'sveaflet';
   import Guess from './lib/Guess.svelte';
   import CarInfo from './lib/CarInfo.svelte';
   import Answer from './lib/Answer.svelte';
   import data from "./data.json";
+  import { museumIcon } from './lib/MarkerDefintions';
   let currentCarIndex = 0;
   let currentCar = $state(data.cars[0]);
 	let marker: Marker;
+  let hasClicked:boolean=$state(false);
   let map:Map;  
-  let mapCenter:Array<number> =  [41.51461251466686,-81.53846740722658]//[41.513319,-81.612571]
+  let museumLocation:Array<number> = [41.513319,-81.612571];
+  let mapCenter:Array<number> =  [41.51461251466686,-81.53846740722658]
   let markerPosition:Array<number> = $state(mapCenter);
   let distance:number | string=$state(0);
   let geoJsons = $state([]);
@@ -41,6 +44,7 @@ function style(feature) {
   const handleNext = ()=>{
     
     hasGuessed = false;
+    hasClicked = false;
     distance = 0;
     markerPosition = mapCenter;
     currentCarIndex = (currentCarIndex +1)%data.cars.length;
@@ -57,23 +61,27 @@ function style(feature) {
 		}}
     bind:instance={map}
     onclick={(e:any)=>{
-      console.log(e);
+      hasClicked = true;
       let latitude = e.latlng.lat;
       let longitude = e.latlng.lng;
       markerPosition = [latitude,longitude]
-      distance =convertMetersToMiles(map.distance(mapCenter,markerPosition));
+      distance =convertMetersToMiles(map.distance(museumLocation,markerPosition));
     }}
 	>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={markerPosition} bind:instance={marker}>
-
-		</Marker>
-          <Polyline
-			latLngs={[
-				mapCenter,
-				markerPosition
-			]}
-		/>
+    
+    <Marker latLng= {museumLocation}>
+      <Icon options={museumIcon}/>
+    </Marker>
+    {#if hasClicked}
+        <Polyline
+          latLngs={[
+            museumLocation,
+            markerPosition
+          ]}
+        />
+    		<Marker latLng={markerPosition} bind:instance={marker}/>
+    {/if}
     <!-- <GeoJSON json={data.cars[0].rangeJson} options={{ attribution: 'GeoJSON' }} /> -->
     {#each geoJsons as [component,props]}
         <svelte:component this={component} {...props}/>
@@ -81,6 +89,7 @@ function style(feature) {
 	</Map>
 </div>
 
+{#key currentCar}
 <CarInfo 
   image={currentCar.image} 
   name={currentCar.name} 
@@ -88,6 +97,7 @@ function style(feature) {
   year={currentCar.year}
   manufacturer={currentCar.manufacturer}
 />
+{/key}
 <Guess {distance} on:click={handleGuess}/>
 {#if hasGuessed}
   <Answer status={status} description={currentCar.answerDescription} on:click={handleNext}/>

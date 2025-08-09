@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { quadInOut } from "svelte/easing";
+  import { fly, slide } from "svelte/transition";
+
     let {image,name, description,year,manufacturer} = $props();
 </script>
-<div class="card">
+<div class="card" in:fly={{duration:800,delay:800,x:"100%",easing:quadInOut}} out:fly={{duration:800,x:"100%",easing:quadInOut}}>
     <h1 class="prompt">How Far Can We Go?</h1>
     <div class="image">
         <img src={image}/>
