@@ -87,7 +87,7 @@ function style(feature) {
     }}
 	>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-    
+     {#if !isAttract}<ControlZoom options={{position:"bottomleft"}}/>{/if}
     <Marker latLng= {museumLocation}>
       <Icon options={museumIcon}/>
     </Marker>
@@ -99,6 +99,7 @@ function style(feature) {
           ]}
         />
     		<Marker latLng={markerPosition} bind:instance={marker}/>
+       
     {/if}
     <!-- <GeoJSON json={data.cars[0].rangeJson} options={{ attribution: 'GeoJSON' }} /> -->
     {#each geoJsons as [component,props]}
