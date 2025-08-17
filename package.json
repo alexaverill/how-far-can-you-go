@@ -18,6 +18,7 @@
     "vite": "^7.0.4"
   },
   "dependencies": {
+    "@sveltejs/adapter-static": "^3.0.9",
     "sveaflet": "^0.1.4"
   }
 }
