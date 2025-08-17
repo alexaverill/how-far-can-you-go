@@ -9,9 +9,7 @@ export default {
       fallback: "404.html",
     }),
     paths: {
-      base: process.argv.includes("dev")
-        ? ""
-        : "http://alexaverill.github.io/how-far-can-you-go/",
+      base: "http://alexaverill.github.io/how-far-can-you-go/",
     },
   },
 };
