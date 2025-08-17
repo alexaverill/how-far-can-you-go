@@ -60,6 +60,7 @@ function style(feature) {
       isAttract = true;
       currentCarIndex = 0;
       currentCar = data.cars[currentCarIndex];
+      geoJsons =[];
       //maybe add conclusion;
     }else{
     currentCarIndex = (currentCarIndex +1)%data.cars.length;
