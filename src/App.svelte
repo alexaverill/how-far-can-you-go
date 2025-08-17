@@ -79,6 +79,7 @@ function style(feature) {
 		}}
     bind:instance={map}
     onclick={(e:any)=>{
+      if(hasGuessed){return;}
       hasClicked = true;
       let latitude = e.latlng.lat;
       let longitude = e.latlng.lng;
