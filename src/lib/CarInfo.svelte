@@ -4,34 +4,35 @@
 
     let {image,name, description,year,manufacturer} = $props();
 </script>
-<div class="card" in:fly={{duration:800,delay:800,x:"100%",easing:quadInOut}} out:fly={{duration:800,x:"100%",easing:quadInOut}}>
-    <h1 class="prompt">How Far Can We Go?</h1>
+<div class="card" in:fly={{duration:500,delay:500,x:"100%",easing:quadInOut}} out:fly={{duration:500,x:"100%",easing:quadInOut}}>
     <div class="image">
         <img src={image}/>
     </div>
-    <h1>{name}</h1>
-        <div class="row year">
-        <span class="bold"> Year:</span><span> {year}</span>
-    </div>
-    <div class="row">
-        <span class="bold"> Manufacturer:</span><span>{manufacturer}</span>
-    </div>
-
-    <p>{description}</p>
+        <p class="title">{name}</p>
+    <div class="info">
+        <div class="row">
+            <div class="column">
+                <p class="year">Year</p>
+                <p class="highlighted">{year}</p>
+            </div>
+            <div class="column end">
+                <p class="year">Manufacturer</p>
+                <p class="highlighted">{manufacturer}</p>
+            </div>
+        </div>
+    <p class="description">{description}</p>
+        </div>
 </div>
 
 <style>
-    .prompt{
-        text-align: center;
-        padding:0;
-        margin-top:0;
+    .info{
+        margin:1rem;
     }
     .card{
         width:var(--card-width);
-        height:80vh;
+        height:75vh;
         background-color: white;
         border-radius: 1rem;
-        padding:1rem;
         display: flex;
         flex-direction: column;
         position: absolute;
@@ -39,26 +40,50 @@
         top:1rem;
         box-shadow: 0px 10px 10px rgba(0,0,0,.5);
     }
+    .title{
+        font-family: InterBold;
+        font-size: 28px;
+        font-weight: bold;
+        background-color: black;
+        color:white;
+        padding:1rem;
+        border-bottom: 6px solid #FFC227;
+        margin: 0;
+        margin-top:-1%;
+
+    
+    }
     .row{
         display:flex;
-        gap:1rem;
-        justify-content: space-between;
-        width:50%;
+        gap:3rem;
+
+    }
+    .column{
+        display: flex;
+        flex-direction: column;
+        gap:12px;
     }
     .year{
-        font-size: 1.5rem;
-    }
-    .bold{
+        font-size: 12px;
+        font-family: InterBold;
         font-weight: bold;
     }
+    .highlighted{
+        color:white;
+        background-color: black;
+        padding:4px 8px 4px 8px;
+    }
+
     img{
         width:100%;
-        border-radius: .5rem;
+        border-radius: .5rem .5rem 0 0;
         max-height: 300px;
         object-fit: contain;
+        background-color: black;
     }
-    p{
+    .description{
         width: 90%;
         overflow: scroll;
+        margin-top: 2rem;
     }
 </style>

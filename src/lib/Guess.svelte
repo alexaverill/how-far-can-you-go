@@ -1,13 +1,26 @@
 <script type="ts">
-export let distance;
-</script>
-<div class="container">
-<div class="distance">
-    Range:
-{distance} {distance==="1.00"?"mile":"miles"}
-</div>
+  import { fade } from "svelte/transition";
 
-<button on:click>Guess!</button>
+let {distance,status,description,guess,next,buttonText="Next"} = $props();
+let hasGuessed = $state(false)
+</script>
+<div class="container" in:fade out:fade>
+    {#if !hasGuessed}
+        <div class="distance">
+            Range:
+        {distance} {distance==="1.00"?"mile":"miles"}
+        </div>
+        <button disabled={distance===0} on:click={()=>{
+            hasGuessed = true;
+            guess();
+        }}>Guess!</button>
+        {:else}
+            <div class="answer">
+                <p class="title">{status}</p>
+                <p class="description">{description}</p>
+                <button on:click={()=> {hasGuessed = false; next();}} class="next">{buttonText}</button>
+            </div>
+        {/if}
 </div>
 <style>
     .container{
@@ -24,19 +37,28 @@ export let distance;
         box-shadow: 5px 5px 5px rgba(0,0,0,.5);
         font-size: 1.75rem;
         color:white;
-        width:var(--card-width)
+        width:460px;
+        transition: all 10s;
 
     }
-    button{
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top:.75rem;
-        padding-bottom:.75rem;
-        font-size: 1.5rem;
-        background-color: white;
-        border:none;
+    .answer{
+        display:flex;
+        flex-direction: column;
+        gap:1rem;
+
     }
-    button:active{
-        background-color: aliceblue;
+    .title{
+       font-family: InterBold;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .description{
+        font-size: 16px;
+    }
+    button{
+        width: fit-content;
+    }
+    .next{
+        align-self: end;
     }
 </style>

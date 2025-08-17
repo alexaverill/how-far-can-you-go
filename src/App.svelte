@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { Map, TileLayer, Marker, Popup, Polyline,GeoJSON,Icon } from 'sveaflet';
+	import { Map, TileLayer, Marker, Popup, Polyline,GeoJSON,Icon, ControlZoom } from 'sveaflet';
   import Guess from './lib/Guess.svelte';
   import CarInfo from './lib/CarInfo.svelte';
   import Answer from './lib/Answer.svelte';
   import data from "./data.json";
   import { museumIcon } from './lib/MarkerDefintions';
+  import Title from './lib/Title.svelte';
+  import Attract from './lib/Attract.svelte';
+  let isAttract = $state(true);
   let currentCarIndex = 0;
   let currentCar = $state(data.cars[0]);
 	let marker: Marker;
@@ -20,8 +23,8 @@
   }
   let status:string = '';
   let hasGuessed = $state(false);
+  let buttonText = $state("Next");
 function style(feature) {
-  console.log(feature)
     return {
         fillColor: "",
         opacity: 1,
@@ -39,7 +42,13 @@ function style(feature) {
     }else{
       status=`Can't Make it!`
     }
+        if(currentCarIndex===data.cars.length-1){
+      buttonText="I'm done"
+    }else{
+      buttonText = "Next"
+    }
     hasGuessed =true;
+
   }
   const handleNext = ()=>{
     
@@ -47,8 +56,15 @@ function style(feature) {
     hasClicked = false;
     distance = 0;
     markerPosition = mapCenter;
+    if(currentCarIndex === data.cars.length-1){
+      isAttract = true;
+      currentCarIndex = 0;
+      currentCar = data.cars[currentCarIndex];
+      //maybe add conclusion;
+    }else{
     currentCarIndex = (currentCarIndex +1)%data.cars.length;
     currentCar = data.cars[currentCarIndex];
+    }
     
   }
 </script>
@@ -57,7 +73,8 @@ function style(feature) {
 	<Map
 		options={{
 			center: mapCenter,
-			zoom: 11
+			zoom: 11,
+      zoomControl:false
 		}}
     bind:instance={map}
     onclick={(e:any)=>{
@@ -88,7 +105,10 @@ function style(feature) {
     {/each}
 	</Map>
 </div>
-
+{#if isAttract}
+<Attract clicked={()=>{isAttract = false;}}/>
+{:else}
+<Title/>
 {#key currentCar}
 <CarInfo 
   image={currentCar.image} 
@@ -98,10 +118,17 @@ function style(feature) {
   manufacturer={currentCar.manufacturer}
 />
 {/key}
-<Guess {distance} on:click={handleGuess}/>
-{#if hasGuessed}
-  <Answer status={status} description={currentCar.answerDescription} on:click={handleNext}/>
+<Guess 
+{distance}
+guess={handleGuess} 
+status={status} 
+description={currentCar.answerDescription} 
+next={handleNext}
+{buttonText}
+/>
+
 {/if}
+
 <style>
   .map{
     position: absolute;
