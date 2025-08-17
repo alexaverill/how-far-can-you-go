@@ -9,7 +9,7 @@ export default {
       fallback: "404.html",
     }),
     paths: {
-      base: "http://alexaverill.github.io/how-far-can-you-go/",
+      base: "https://evs.averill.dev",
     },
   },
 };
