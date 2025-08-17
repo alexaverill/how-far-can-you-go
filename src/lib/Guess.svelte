@@ -17,6 +17,7 @@ let hasGuessed = $state(false)
         {:else}
             <div class="answer">
                 <p class="title">{status}</p>
+                <p class="description">Your guess: <span class="highlight">{distance} {distance==="1.00"?"mile":"miles"}</span></p>
                 <p class="description">{description}</p>
                 <button on:click={()=> {hasGuessed = false; next();}} class="next">{buttonText}</button>
             </div>
@@ -44,7 +45,7 @@ let hasGuessed = $state(false)
     .answer{
         display:flex;
         flex-direction: column;
-        gap:1rem;
+        gap:.5rem;
 
     }
     .title{
@@ -60,5 +61,10 @@ let hasGuessed = $state(false)
     }
     .next{
         align-self: end;
+    }
+    .highlight{
+        font-family: InterBold;
+        font-weight: bold;
+        color:#FFC227;
     }
 </style>
