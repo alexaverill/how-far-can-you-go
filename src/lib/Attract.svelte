@@ -6,11 +6,8 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div class="container" on:click={clicked} in:fade out:fade>
     <div class="attract">
-        <h1>How far can historic Electric Vehicles go?</h1>
-        <div class="subtitle">
-        <p>Select a destination on the map and see if you can make it!</p>
+        <h1>How far can historic <span>EVs</span> go?</h1>
         <button on:click={clicked}>Get Started</button>
-        </div>
     </div>
 
 </div>
@@ -37,11 +34,11 @@
         padding:1rem;
         padding-left:8rem;
         padding-right:8rem;
-        padding-bottom:3rem;
+        padding-bottom:12rem;
         display: flex;
         flex-direction: column;
         gap:1rem;
-        border-radius: 50px;
+        border-radius:1rem;
     }
     .subtitle{
         font-family: Inter;
@@ -58,12 +55,18 @@
     }
     h1{
         font-family: InterBold;
-        font-size: 100px;
+        font-size: 110px;
         text-wrap: pretty;
-        line-height: 120px;
+        width: 90%;
         margin-bottom:30px;
+        text-transform: capitalize;
+    }
+    span{
+        color:#FFC227;
     }
     button{
+        font-weight: bold;
+        font-size: 48px;
         width: fit-content;
     }
 </style>

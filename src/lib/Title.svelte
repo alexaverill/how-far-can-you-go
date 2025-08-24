@@ -21,6 +21,7 @@
         font-family: InterBold;
         font-weight: bold;
         font-size: 24px;
+        margin-top:0;
 
     }
     p{

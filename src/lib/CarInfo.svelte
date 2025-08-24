@@ -20,7 +20,9 @@
                 <p class="highlighted">{manufacturer}</p>
             </div>
         </div>
-    <p class="description">{description}</p>
+        <div class="description">
+         <p class="description-text">{description}</p>
+        </div>
         </div>
 </div>
 
@@ -61,7 +63,7 @@
     .column{
         display: flex;
         flex-direction: column;
-        gap:12px;
+        gap:6px;
     }
     .year{
         font-size: 12px;
@@ -85,9 +87,12 @@
         width: 90%;
         overflow: auto;
         margin-top: 2rem;
-        max-height: 200px;
+        max-height: 300px;
         padding-right:1rem;
          mask-image: linear-gradient(0deg,rgba(42, 123, 155, 0) 0%, rgba(0, 0, 0, 1) 15%),
          linear-gradient(90deg,rgba(42, 123, 155, 0) 95%, rgba(0, 0, 0, 1) 30%);
+    }
+    .description-text{
+        padding-bottom: 3rem;
     }
 </style>
