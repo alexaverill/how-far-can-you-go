@@ -83,7 +83,11 @@
     }
     .description{
         width: 90%;
-        overflow: scroll;
+        overflow: auto;
         margin-top: 2rem;
+        max-height: 200px;
+        padding-right:1rem;
+         mask-image: linear-gradient(0deg,rgba(42, 123, 155, 0) 0%, rgba(0, 0, 0, 1) 15%),
+         linear-gradient(90deg,rgba(42, 123, 155, 0) 95%, rgba(0, 0, 0, 1) 30%);
     }
 </style>

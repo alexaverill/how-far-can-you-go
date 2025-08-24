@@ -7,7 +7,9 @@
   import { museumIcon } from './lib/MarkerDefintions';
   import Title from './lib/Title.svelte';
   import Attract from './lib/Attract.svelte';
+  import Conclusion from './lib/Conclusion.svelte';
   let isAttract = $state(true);
+  let isConclusion = $state(false);
   let currentCarIndex = 0;
   let currentCar = $state(data.cars[0]);
 	let marker: Marker;
@@ -35,17 +37,14 @@ function style(feature) {
     };
 }
   const handleGuess = ()=>{
-    map.setZoom(currentCar.answerZoom)
+    map.panTo(museumLocation);
+    map.setZoom(currentCar.answerZoom);
+    
     geoJsons.push([GeoJSON,{json:currentCar.rangeJson,options:{style:style}}]);
     if(parseFloat(distance) < currentCar.range){
       status=`You Made It!`
     }else{
       status=`Can't Make it!`
-    }
-        if(currentCarIndex===data.cars.length-1){
-      buttonText="I'm done"
-    }else{
-      buttonText = "Next"
     }
     hasGuessed =true;
 
@@ -56,17 +55,24 @@ function style(feature) {
     hasClicked = false;
     distance = 0;
     markerPosition = mapCenter;
-    if(currentCarIndex === data.cars.length-1){
-      isAttract = true;
-      currentCarIndex = 0;
-      currentCar = data.cars[currentCarIndex];
-      geoJsons =[];
-      //maybe add conclusion;
+    if(isConclusion){
+      reset();
+    }else if(currentCarIndex === data.cars.length-1){
+      isConclusion = true;
+
     }else{
     currentCarIndex = (currentCarIndex +1)%data.cars.length;
     currentCar = data.cars[currentCarIndex];
     }
     
+  }
+  const reset = ()=>{
+          currentCarIndex = 0;
+      currentCar = data.cars[currentCarIndex];
+      geoJsons =[];
+      map.panTo(museumLocation);
+    isConclusion= false;
+    isAttract = true;
   }
 </script>
 
@@ -109,27 +115,29 @@ function style(feature) {
 	</Map>
 </div>
 {#if isAttract}
-<Attract clicked={()=>{isAttract = false;}}/>
+  <Attract clicked={()=>{isAttract = false;}}/>
 {:else}
-<Title/>
-{#key currentCar}
-<CarInfo 
-  image={currentCar.image} 
-  name={currentCar.name} 
-  description={currentCar.description}
-  year={currentCar.year}
-  manufacturer={currentCar.manufacturer}
-/>
-{/key}
-<Guess 
-{distance}
-guess={handleGuess} 
-status={status} 
-description={currentCar.answerDescription} 
-next={handleNext}
-{buttonText}
-/>
-
+  <Title/>
+  {#if !isConclusion}
+    {#key currentCar}
+      <CarInfo 
+        image={currentCar.image} 
+        name={currentCar.name} 
+        description={currentCar.description}
+        year={currentCar.year}
+        manufacturer={currentCar.manufacturer}
+      />
+    {/key}
+  {/if}
+  <Guess 
+  {distance}
+  guess={handleGuess} 
+  status={status} 
+  description={currentCar.answerDescription} 
+  next={handleNext}
+  buttonText={"Next"}
+  {isConclusion}
+  />
 {/if}
 
 <style>

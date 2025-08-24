@@ -1,11 +1,18 @@
 <script type="ts">
   import { fade } from "svelte/transition";
+  import Conclusion from "./Conclusion.svelte";
 
-let {distance,status,description,guess,next,buttonText="Next"} = $props();
+let {distance,status,description,guess,next,buttonText="Next",isConclusion} = $props();
 let hasGuessed = $state(false)
 </script>
 <div class="container" in:fade out:fade>
-    {#if !hasGuessed}
+    {#if isConclusion}
+            <div class="answer">
+                <p class="title">Good Job!</p>
+                <p class="description">Now take what you've learned and think about which car in the museum would be best for you.</p>
+                <button on:click={()=>{next()}} class="next">I'm done.</button>
+            </div>
+    {:else if !hasGuessed}
         <div class="distance">
             Range:
         {distance} {distance==="1.00"?"mile":"miles"}
@@ -21,6 +28,7 @@ let hasGuessed = $state(false)
                 <p class="description">{description}</p>
                 <button on:click={()=> {hasGuessed = false; next();}} class="next">{buttonText}</button>
             </div>
+        
         {/if}
 </div>
 <style>
