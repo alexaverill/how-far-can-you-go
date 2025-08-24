@@ -7,12 +7,12 @@
   import { museumIcon,genericIcon } from './lib/MarkerDefintions';
   import Title from './lib/Title.svelte';
   import Attract from './lib/Attract.svelte';
-  import Conclusion from './lib/Conclusion.svelte';
   let isAttract = $state(true);
   let isConclusion = $state(false);
   let currentCarIndex = 0;
   let currentCar = $state(data.cars[0]);
   let currentIcon = $state(data.cars[0].icon ?? genericIcon);
+  let lineColor = $state(data.cars[0]?.lineColor ?? "red")
 	let marker: Marker;
   let hasClicked:boolean=$state(false);
   let map:Map;  
@@ -64,8 +64,8 @@ function style(feature) {
     }else{
       currentCarIndex = (currentCarIndex +1)%data.cars.length;
       currentCar = data.cars[currentCarIndex];
-    
-      if(data.cars[currentCarIndex].icon){
+      lineColor = data.cars[currentCarIndex].lineColor
+;      if(data.cars[currentCarIndex].icon){
         currentIcon  = data.cars[currentCarIndex].icon;
       }else{
         currentIcon = genericIcon;
@@ -111,6 +111,7 @@ function style(feature) {
             museumLocation,
             markerPosition
           ]}
+          options={{color:lineColor}}
         />
     		<Marker latLng={markerPosition} bind:instance={marker}>
           <Icon options={currentIcon}/>

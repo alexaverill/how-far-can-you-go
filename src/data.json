@@ -9,6 +9,7 @@
       "range": 40,
       "answerDescription": "The range of the citicar is around 40 miles. You could have easily made it to Akron",
       "answerZoom": 9,
+      "lineColor": "#FFC227",
       "rangeJson": {
         "type": "FeatureCollection",
         "features": [
@@ -89,7 +90,7 @@
             },
             "style": {
               "__comment": "all SVG styles allowed",
-              "fill": "red",
+              "fill": "#FFC227",
               "stroke-width": "3",
               "fill-opacity": 0.6
             }
@@ -111,6 +112,7 @@
       "range": 110,
       "answerDescription": "The range of the Baker Electric is around 110 miles. You could have made it to the outskirts of Columbus.",
       "answerZoom": "7",
+      "lineColor": "#7627FF",
       "rangeJson": {
         "type": "FeatureCollection",
         "features": [
@@ -192,12 +194,17 @@
             },
             "style": {
               "__comment": "all SVG styles allowed",
-              "fill": "blue",
+              "fill": "#7627FF",
               "stroke-width": "3",
               "fill-opacity": 0.6
             }
           }
         ]
+      },
+      "icon": {
+        "iconSize": [24.5, 36.5],
+        "iconAnchor": [12, 36.5],
+        "iconUrl": "./baker_icon.png"
       }
     },
     {
@@ -209,6 +216,7 @@
       "range": 105,
       "answerDescription": "The range of the EV1 was around 105 miles You could have made it to the outskirts of Columbus.",
       "answerZoom": "7",
+      "lineColor": "#4D9317",
       "rangeJson": {
         "type": "FeatureCollection",
         "features": [
@@ -289,12 +297,17 @@
             },
             "style": {
               "__comment": "all SVG styles allowed",
-              "fill": "green",
+              "fill": "#4D9317",
               "stroke-width": "3",
               "fill-opacity": 0.6
             }
           }
         ]
+      },
+      "icon": {
+        "iconSize": [24.5, 36.5],
+        "iconAnchor": [12, 36.5],
+        "iconUrl": "./ev1_icon.png"
       }
     }
   ]
