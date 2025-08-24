@@ -9,7 +9,7 @@
       "range": 40,
       "answerDescription": "The range of the citicar is around 40 miles. You could have easily made it to Akron",
       "answerZoom": 9,
-      "lineColor": "#FFC227",
+      "lineColor": "#FF2727",
       "rangeJson": {
         "type": "FeatureCollection",
         "features": [
@@ -90,7 +90,7 @@
             },
             "style": {
               "__comment": "all SVG styles allowed",
-              "fill": "#FFC227",
+              "fill": "#FF2727",
               "stroke-width": "3",
               "fill-opacity": 0.6
             }
