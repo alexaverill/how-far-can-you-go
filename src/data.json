@@ -95,6 +95,11 @@
             }
           }
         ]
+      },
+      "icon": {
+        "iconSize": [24.5, 36.5],
+        "iconAnchor": [12, 36.5],
+        "iconUrl": "./citicar_icon.png"
       }
     },
     {

@@ -9,3 +9,8 @@ export const museumIcon = {
   ...commonIconOptions,
   iconUrl: "./museum.png",
 };
+export const genericIcon = {
+  iconSize: [24.5, 36.5],
+  iconAnchor: [12, 36.5],
+  iconUrl: "./generic_icon.png",
+};

@@ -4,7 +4,7 @@
   import CarInfo from './lib/CarInfo.svelte';
   import Answer from './lib/Answer.svelte';
   import data from "./data.json";
-  import { museumIcon } from './lib/MarkerDefintions';
+  import { museumIcon,genericIcon } from './lib/MarkerDefintions';
   import Title from './lib/Title.svelte';
   import Attract from './lib/Attract.svelte';
   import Conclusion from './lib/Conclusion.svelte';
@@ -12,6 +12,7 @@
   let isConclusion = $state(false);
   let currentCarIndex = 0;
   let currentCar = $state(data.cars[0]);
+  let currentIcon = $state(data.cars[0].icon ?? genericIcon);
 	let marker: Marker;
   let hasClicked:boolean=$state(false);
   let map:Map;  
@@ -59,10 +60,16 @@ function style(feature) {
       reset();
     }else if(currentCarIndex === data.cars.length-1){
       isConclusion = true;
-
+      data.cars[currentCarIndex].icon
     }else{
-    currentCarIndex = (currentCarIndex +1)%data.cars.length;
-    currentCar = data.cars[currentCarIndex];
+      currentCarIndex = (currentCarIndex +1)%data.cars.length;
+      currentCar = data.cars[currentCarIndex];
+    
+      if(data.cars[currentCarIndex].icon){
+        currentIcon  = data.cars[currentCarIndex].icon;
+      }else{
+        currentIcon = genericIcon;
+      }
     }
     
   }
@@ -105,7 +112,9 @@ function style(feature) {
             markerPosition
           ]}
         />
-    		<Marker latLng={markerPosition} bind:instance={marker}/>
+    		<Marker latLng={markerPosition} bind:instance={marker}>
+          <Icon options={currentIcon}/>
+        </Marker>
        
     {/if}
     <!-- <GeoJSON json={data.cars[0].rangeJson} options={{ attribution: 'GeoJSON' }} /> -->
