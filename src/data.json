@@ -98,8 +98,8 @@
         ]
       },
       "icon": {
-        "iconSize": [24.5, 36.5],
-        "iconAnchor": [12, 36.5],
+        "iconSize": [49, 73],
+        "iconAnchor": [24, 73],
         "iconUrl": "./citicar_icon.png"
       }
     },
@@ -202,8 +202,8 @@
         ]
       },
       "icon": {
-        "iconSize": [24.5, 36.5],
-        "iconAnchor": [12, 36.5],
+        "iconSize": [49, 73],
+        "iconAnchor": [24, 73],
         "iconUrl": "./baker_icon.png"
       }
     },
@@ -305,8 +305,8 @@
         ]
       },
       "icon": {
-        "iconSize": [24.5, 36.5],
-        "iconAnchor": [12, 36.5],
+        "iconSize": [49, 73],
+        "iconAnchor": [24, 73],
         "iconUrl": "./ev1_icon.png"
       }
     }
