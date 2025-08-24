@@ -78,6 +78,7 @@ function style(feature) {
       currentCar = data.cars[currentCarIndex];
       geoJsons =[];
       map.panTo(museumLocation);
+      map.setZoom(11);
     isConclusion= false;
     isAttract = true;
   }
@@ -125,7 +126,7 @@ function style(feature) {
 	</Map>
 </div>
 {#if isAttract}
-  <Attract clicked={()=>{isAttract = false;}}/>
+  <Attract clicked={()=>{isAttract = false;map.setZoom(11);}}/>
 {:else}
   <Title/>
   {#if !isConclusion}
