@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import { fade } from "svelte/transition";
 
-    let {clicked} = $props();
+    let {clicked}:{clicked:Boolean} = $props();
 </script>
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div class="container" on:click={clicked} in:fade out:fade>

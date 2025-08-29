@@ -1,8 +1,14 @@
 <script lang="ts">
   import { quadInOut } from "svelte/easing";
   import { fly, slide } from "svelte/transition";
-
-    let {image,name, description,year,manufacturer} = $props();
+    interface CarInfo{
+        image:string;
+        name:string;
+        description:string;
+        year:string;
+        manufacturer:string
+    }
+    let {image,name, description,year,manufacturer}:CarInfo = $props();
 </script>
 <div class="card" in:fly={{duration:500,delay:500,x:"100%",easing:quadInOut}} out:fly={{duration:500,x:"100%",easing:quadInOut}}>
     <div class="image">

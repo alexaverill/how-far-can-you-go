@@ -3,7 +3,7 @@ import adapter from "@sveltejs/adapter-static";
 export default {
   // Consult https://svelte.dev/docs#compile-time-svelte-preprocess
   // for more information about preprocessors
-  preprocess: vitePreprocess(),
+  preprocess: vitePreprocess({ script: true }),
   kit: {
     adapter: adapter({
       fallback: "404.html",
